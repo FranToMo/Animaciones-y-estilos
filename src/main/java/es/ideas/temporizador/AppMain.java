@@ -14,6 +14,7 @@ public class AppMain extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 520, 440);
         stage.setTitle("Temporizador");
         stage.setScene(scene);
+        stage.setResizable(true);
         stage.show();
     }
 
