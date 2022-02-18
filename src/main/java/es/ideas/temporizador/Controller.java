@@ -28,47 +28,7 @@ public class Controller implements Initializable {
         animateClock();
     }
 
-//    private void update(){
-//        now = Calendar.getInstance();
-//        hour1 = (now.get(Calendar.HOUR_OF_DAY)/10);
-//        hour2 = (now.get(Calendar.HOUR_OF_DAY))%10;
-//        minute1 = (now.get(Calendar.MINUTE))/10;
-//        minute2 = (now.get(Calendar.MINUTE))%10;
-//        second1 = (now.get(Calendar.SECOND))/10;
-//        second2 = (now.get(Calendar.SECOND))%10;
-//
-//
-//        tC1.setText("0");
-//        tC2.setText("0");
-//        tC3.setText("0");
-//        tC4.setText("0");
-//        tC5.setText("0");
-//        tC6.setText("0");
-//
-//
-//    }
-//
-//    private void animateClock(){
-//        lineaPrimaria = new Timeline();
-//        lineaSecundaria = new Timeline();
-//        lineaSecundaria.setCycleCount(Timeline.INDEFINITE);
-//        keyPrimario = new KeyFrame(
-//                new Duration(1000-now.get(Calendar.MILLISECOND)%1000),
-//                (event)->{
-//                    update();
-//                    lineaSecundaria.play();
-//                }
-//        );
-//        keySecundario = new KeyFrame(
-//                Duration.seconds(1),
-//                (event)-> {
-//                    update();
-//                }
-//        );
-//        lineaPrimaria.getKeyFrames().add(keyPrimario);
-//        lineaSecundaria.getKeyFrames().add(keySecundario);
-//        lineaPrimaria.play();
-//    }
+
 
     private void update(){
         now = Calendar.getInstance();
@@ -87,6 +47,11 @@ public class Controller implements Initializable {
     }
 
     private void animateClock(){
+
+        int[] num = {9};
+
+
+
         lineaPrimaria = new Timeline();
         lineaSecundaria = new Timeline();
         lineaSecundaria.setCycleCount(Timeline.INDEFINITE);
@@ -95,7 +60,7 @@ public class Controller implements Initializable {
                         (event)->{
                     update();
                     lineaSecundaria.play();
-                        }
+                }
         );
         keySecundario = new KeyFrame(
                 Duration.seconds(1),
@@ -103,8 +68,21 @@ public class Controller implements Initializable {
                     update();
                 }
         );
+        // *******
+        KeyFrame keyDePrueba = new KeyFrame(Duration.seconds(1),(event -> {
+            int n = Integer.parseInt(tC6.getText())-1;
+            tC6.setText(""+n);
+
+        }));
+        // *********
         lineaPrimaria.getKeyFrames().add(keyPrimario);
-        lineaSecundaria.getKeyFrames().add(keySecundario);
+        lineaSecundaria.getKeyFrames().addAll(keySecundario, keyDePrueba);
+
         lineaPrimaria.play();
+    }
+
+
+    private void countDown(){
+
     }
 }

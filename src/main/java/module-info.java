@@ -9,6 +9,7 @@ module es.ideas.temporizador {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires javafx.graphics;
 
     opens es.ideas.temporizador to javafx.fxml;
     exports es.ideas.temporizador;
