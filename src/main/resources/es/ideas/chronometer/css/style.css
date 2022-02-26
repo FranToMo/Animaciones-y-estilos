@@ -1,0 +1,4 @@
+.button:hover {
+    -fx-background-color: rgba(222, 162, 40, 1);
+    -fx-effect: dropshadow(gaussian, rgba(247, 180, 44, 0.2), 12, 0, 0, 8);
+}

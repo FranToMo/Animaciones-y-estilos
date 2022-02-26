@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.ideas.chronometer.Controller">
+   <children>
+      <GridPane layoutX="200.0" layoutY="80.0" prefHeight="250.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="300.0" minWidth="10.0" prefWidth="200.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.0" minWidth="10.0" prefWidth="400.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <AnchorPane fx:id="timerPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F29100;">
+                     <children>
+                        <GridPane prefHeight="250.0" prefWidth="389.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="223.0" minHeight="10.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <GridPane prefHeight="217.0" prefWidth="389.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="130.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" prefWidth="130.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="140.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="16.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="177.0" minHeight="10.0" prefHeight="140.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Text fill="#663d00" strokeType="OUTSIDE" strokeWidth="0.0" text="Horas" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <Text fill="#663d00" layoutX="10.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutos" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <Text fill="#663d00" layoutX="140.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segundos" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <AnchorPane prefHeight="102.0" prefWidth="106.0" style="-fx-background-color: #CC7A00;" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </GridPane.margin>
+                                       <children>
+                                          <Text fx:id="horasTime" layoutX="2.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F29100;" text="00">
+                                             <font>
+                                                <Font name="ArtifaktElement-Regular" size="80.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #CC7A00;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </GridPane.margin>
+                                       <children>
+                                          <Text fx:id="minutosTime" layoutX="-2.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F29100;" text="00">
+                                             <font>
+                                                <Font name="ArtifaktElement-Regular" size="80.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #CC7A00;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                       <GridPane.margin>
+                                          <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                                       </GridPane.margin>
+                                       <children>
+                                          <Text fx:id="segundosTime" layoutX="5.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #F29100;" text="00">
+                                             <font>
+                                                <Font name="ArtifaktElement-Regular" size="80.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </GridPane>
+                              <JFXButton fx:id="botonCancelar" onAction="#stopped" prefWidth="150.0" style="-fx-background-color: #A66300;" text="Cancelar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="menuPane" prefHeight="237.0" prefWidth="407.0" style="-fx-background-color: #F29100;">
+                     <children>
+                        <GridPane prefHeight="250.0" prefWidth="389.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="196.0" minHeight="10.0" prefHeight="196.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="120.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <GridPane>
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="148.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="241.0" minWidth="10.0" prefWidth="241.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+                                    <Text fill="#663d00" strokeType="OUTSIDE" strokeWidth="0.0" text="Horas" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+                                    <Text fill="#663d00" layoutX="73.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutos" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
+                                    <Text fill="#663d00" layoutX="10.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segundos" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+                                    <JFXComboBox fx:id="horasInput" focusColor="#e68b00" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                    <JFXComboBox fx:id="minutosInput" focusColor="#e68b00" layoutX="158.0" layoutY="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <JFXComboBox fx:id="segundosInput" focusColor="#e68b00" layoutX="158.0" layoutY="96.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                 </children>
+                              </GridPane>
+                              <JFXButton fx:id="botonInicio" onAction="#start" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #A66300;" text="Start" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </StackPane>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F2AE49;">
+               <children>
+                  <ImageView fitHeight="144.0" fitWidth="182.0" layoutX="42.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true" smooth="false">
+                     <image>
+                        <Image url="@img/Stopwatch.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
