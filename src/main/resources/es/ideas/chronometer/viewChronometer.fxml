@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -89,11 +89,7 @@
                                     </AnchorPane>
                                  </children>
                               </GridPane>
-                              <JFXButton fx:id="botonCancelar" onAction="#stopped" prefWidth="150.0" style="-fx-background-color: #A66300;" text="Cancelar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </JFXButton>
+                              <Button fx:id="botonCancelar" mnemonicParsing="false"  prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #663D00;" text="Cancelar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -123,16 +119,12 @@
                                     <Text fill="#663d00" strokeType="OUTSIDE" strokeWidth="0.0" text="Horas" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
                                     <Text fill="#663d00" layoutX="73.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minutos" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
                                     <Text fill="#663d00" layoutX="10.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Segundos" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                                    <JFXComboBox fx:id="horasInput" focusColor="#e68b00" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                                    <JFXComboBox fx:id="minutosInput" focusColor="#e68b00" layoutX="158.0" layoutY="31.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                                    <JFXComboBox fx:id="segundosInput" focusColor="#e68b00" layoutX="158.0" layoutY="96.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                    <ComboBox fx:id="horasInput" prefWidth="150.0" style="-fx-background-color: #F29100;" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+                                    <ComboBox fx:id="minutosInput" prefWidth="150.0" style="-fx-background-color: #F29100;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="segundosInput" prefWidth="150.0" style="-fx-background-color: #F29100;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
-                              <JFXButton fx:id="botonInicio" onAction="#start" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #A66300;" text="Start" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </JFXButton>
+                              <Button fx:id="botonInicio" mnemonicParsing="false"  prefHeight="25.0" prefWidth="100.0" style="-fx-background-color: #663D00;" text="Start" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children>
