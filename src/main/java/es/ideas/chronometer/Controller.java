@@ -27,7 +27,7 @@ public class Controller implements Initializable {
 
 
         for (int i = 0; i <=59 ; i++) {
-            if(0<=i && i<=24){
+            if(0<=i && i<=23){
                 listaDeHoras.add(Integer.valueOf(i));
             }
             listaDeMinutosYSegundos.add(Integer.valueOf(i));
