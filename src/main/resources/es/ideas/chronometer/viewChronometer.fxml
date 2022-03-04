@@ -90,7 +90,7 @@
                                     </AnchorPane>
                                  </children>
                               </GridPane>
-                              <Button fx:id="botonCancelar"  prefWidth="150.0" style="-fx-background-color: #A66300;" text="Cancelar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                              <Button fx:id="botonCancelar" onAction="#stopped" prefWidth="150.0" style="-fx-background-color: #A66300;" text="Cancelar" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -129,7 +129,7 @@
                                     <ComboBox fx:id="segundosInput" style="-fx-background-color:#e68b00" layoutX="158.0" layoutY="96.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
                                  </children>
                               </GridPane>
-                              <Button fx:id="botonInicio"  prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #A66300;" text="Start" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                              <Button fx:id="botonInicio" onAction="#start" prefHeight="25.0" prefWidth="130.0" style="-fx-background-color: #A66300;" text="Start" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
