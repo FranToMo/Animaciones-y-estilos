@@ -144,22 +144,19 @@ detener = true;
     }
 
     void startCountdown(){
-       thread = new Thread(new Runnable() {
-           @Override
-           public void run() {
-               try {
-                   while (!detener){
-                       setOutput();
-                       Thread.sleep(1000);
-                       if(segundosActuales == 0) {
-                           scrollDown();
-                           playAudio();
-                           detener=true;
-                       }
-                       segundosActuales-=1;
+       thread = new Thread(() -> {
+           try {
+               while (!detener){
+                   setOutput();
+                   Thread.sleep(1000);
+                   if(segundosActuales == 0) {
+                       scrollDown();
+                       playAudio();
+                       detener=true;
                    }
-               }catch (Exception e){}
-           }
+                   segundosActuales-=1;
+               }
+           }catch (Exception e){}
        }) ;
        thread.start();
     }
@@ -179,7 +176,6 @@ detener = true;
     void stopped(ActionEvent event) {
         detener = true;
         scrollDown();
-//        scroll(true,timerPane,menuPane);
 
     }
 
