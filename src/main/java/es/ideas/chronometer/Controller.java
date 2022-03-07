@@ -22,9 +22,6 @@ import java.util.TreeMap;
 
 public class Controller implements Initializable {
 
-    
-    @FXML
-    private Button botonCancelar, botonInicio;
     @FXML
     private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
@@ -179,7 +176,6 @@ detener = true;
     void stopped(ActionEvent event) {
         detener = true;
         scrollDown();
-//        scroll(true,timerPane,menuPane);
 
     }
 
