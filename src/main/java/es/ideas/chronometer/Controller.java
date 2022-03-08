@@ -17,7 +17,15 @@ public class Controller implements Initializable {
     @FXML
     private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
+    private Text horasTime, minutosTime, segundosTime;  
+    @FXML
+    private Button botonCancelar, botonInicio;
+    @FXML
+    private ComboBox<Integer> horasInput, minutosInput, segundosInput;
+    @FXML
     private Text horasTime, minutosTime, segundosTime;
+    @FXML
+    private AnchorPane timerPane, menuPane;
     Map<Integer, String> numberMap;
     Integer segundosActuales;
 
@@ -70,8 +78,8 @@ public class Controller implements Initializable {
             }
         }
     }
-
-    /**
+  
+      /**
      * Asigna el valor seleccionado en cada comboBox
      * al valor inicial de cada uno de los nodos Text
      * que forman el cronómetro.
@@ -81,5 +89,25 @@ public class Controller implements Initializable {
         horasTime.setText(numberMap.get(actualHms.get(0)));
         minutosTime.setText(numberMap.get(actualHms.get(1)));
         segundosTime.setText(numberMap.get(actualHms.get(2)));
+
+    
+    
+    public Integer hmsToSeconds(Integer h, Integer m, Integer s){
+        Integer hToSeconds = h*3600;
+        Integer mToSecond = m*60;
+
+        return hToSeconds+mToSecond+s;
+    }
+    public LinkedList<Integer> secondsToHms(Integer segundosActuales){
+        Integer horas = segundosActuales/3600;
+        segundosActuales = segundosActuales%3600;
+        Integer minutos = segundosActuales/60;
+        Integer segundos = segundosActuales%60;
+        LinkedList<Integer> respuesta = new LinkedList<>();
+        respuesta.add(horas);
+        respuesta.add(minutos);
+        respuesta.add(segundos);
+        return respuesta;
+
     }
 }
