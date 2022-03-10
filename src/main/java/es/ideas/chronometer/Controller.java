@@ -20,18 +20,18 @@ import javafx.scene.media.AudioClip;
 import javafx.util.Duration;
 
 public class Controller implements Initializable {
-    
-	@FXML
+
+    @FXML
     private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
-    private Text horasTime, minutosTime, segundosTime;	
-	@FXML
+    private Text horasTime, minutosTime, segundosTime;  
+    @FXML
     private Button botonCancelar, botonInicio;
     @FXML
-    private ComboBox<Integer> horasInput, minutosInput, segundosInput;
+    private ComboBox<Integer> horasInput, minutosInput, segundosInput;      
     @FXML
     private AnchorPane timerPane, menuPane;
-	Map<Integer, String> numberMap;
+	  Map<Integer, String> numberMap;
     Integer segundosActuales;
     private static final String MEDIA_URL = "media/alarma.mp3";
     boolean detener;    
@@ -59,46 +59,7 @@ public class Controller implements Initializable {
         return respuesta;
     }
 
-    public void scrollUp(){
-
-        transition01 = new TranslateTransition();
-        transition01.setDuration(Duration.millis(100));
-        transition01.setToX(0);
-        transition01.setToY(200);
-        transition01.setNode(menuPane);
-        transition02 = new TranslateTransition();
-        transition02.setDuration(Duration.millis(100));
-        transition02.setFromX(0);
-        transition02.setFromY(200);
-        transition02.setToX(0);
-        transition02.setToY(0);
-        transition02.setNode(timerPane);
-        parallelTransition = new ParallelTransition(transition01,transition02);
-      parallelTransition.setOnFinished(e -> {
-          startCountdown();
-        });
-        parallelTransition.play();
-    }
-
-    public void scrollDown(){
-
-        transition01 = new TranslateTransition();
-        transition01.setDuration(Duration.millis(100));
-        transition01.setToX(0);
-        transition01.setToY(-200);
-        transition01.setNode(timerPane);
-        transition02 = new TranslateTransition();
-        transition02.setDuration(Duration.millis(100));
-        transition02.setFromX(0);
-        transition02.setFromY(200);
-        transition02.setToX(0);
-        transition02.setToY(0);
-        transition02.setNode(menuPane);
-        parallelTransition = new ParallelTransition(transition01,transition02);
-        parallelTransition.play();
-
-    }
-    @Override
+     @Override
     public void initialize(URL location, ResourceBundle resources) {
 detener = true;
 
@@ -128,19 +89,60 @@ detener = true;
             }
         }
     }
-	
-	    /**
+
      * Asigna el valor seleccionado en cada comboBox
      * al valor inicial de cada uno de los nodos Text
-     * que forman el cronómetro.
+     * que forman el cron�metro.
      */
     void setOutput(){
         LinkedList<Integer> actualHms = secondsToHms(segundosActuales);
         horasTime.setText(numberMap.get(actualHms.get(0)));
         minutosTime.setText(numberMap.get(actualHms.get(1)));
         segundosTime.setText(numberMap.get(actualHms.get(2)));
+
+}
+    public void scrollUp(){
+
+        transition01 = new TranslateTransition();
+        transition01.setDuration(Duration.millis(100));
+        transition01.setToX(0);
+        transition01.setToY(200);
+        transition01.setNode(menuPane);
+        transition02 = new TranslateTransition();
+        transition02.setDuration(Duration.millis(100));
+        transition02.setFromX(0);
+        transition02.setFromY(200);
+        transition02.setToX(0);
+        transition02.setToY(0);
+        transition02.setNode(timerPane);
+        parallelTransition = new ParallelTransition(transition01,transition02);
+        parallelTransition.setOnFinished(e -> {
+            try{
+                System.out.println("Comienza la cuenta atr�s");
+                startCountdown();
+            }catch (Exception exception){}
+        });
+        parallelTransition.play();
     }
 
+    public void scrollDown(){
+
+        transition01 = new TranslateTransition();
+        transition01.setDuration(Duration.millis(100));
+        transition01.setToX(0);
+        transition01.setToY(-200);
+        transition01.setNode(timerPane);
+        transition02 = new TranslateTransition();
+        transition02.setDuration(Duration.millis(100));
+        transition02.setFromX(0);
+        transition02.setFromY(200);
+        transition02.setToX(0);
+        transition02.setToY(0);
+        transition02.setNode(menuPane);
+        parallelTransition = new ParallelTransition(transition01,transition02);
+        parallelTransition.play();
+
+    }
 
     @FXML
     void start(ActionEvent event) {
@@ -185,3 +187,4 @@ detener = true;
         alarma.play();
     }
 }
+
