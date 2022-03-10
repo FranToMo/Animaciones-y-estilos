@@ -14,10 +14,23 @@ import java.util.TreeMap;
 
 public class Controller implements Initializable {
 
+	@FXML
+    private ComboBox<Integer> horasInput, minutosInput, segundosInput;
+    @FXML
+    private Text horasTime, minutosTime, segundosTime;  
+    @FXML
+    private Button botonCancelar, botonInicio;
     @FXML
     private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
     private Text horasTime, minutosTime, segundosTime;
+    @FXML
+    private AnchorPane timerPane, menuPane;
+    Map<Integer, String> numberMap;
+    Integer segundosActuales;
+	
+	
+	
     Map<Integer, String> numberMap;
     Integer segundosActuales;
 
@@ -113,15 +126,20 @@ public class Controller implements Initializable {
         }
     }
 
-    /**
+ /**
      * Asigna el valor seleccionado en cada comboBox
      * al valor inicial de cada uno de los nodos Text
-     * que forman el cronÃ³metro.
+     * que forman el cronómetro.
      */
     void setOutput(){
         LinkedList<Integer> actualHms = secondsToHms(segundosActuales);
         horasTime.setText(numberMap.get(actualHms.get(0)));
         minutosTime.setText(numberMap.get(actualHms.get(1)));
         segundosTime.setText(numberMap.get(actualHms.get(2)));
-    }
+		
+
+}
+
+
+
 }
