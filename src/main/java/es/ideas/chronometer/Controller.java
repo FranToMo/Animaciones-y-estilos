@@ -23,6 +23,12 @@ public class Controller implements Initializable {
     @FXML
     private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
+    private Text horasTime, minutosTime, segundosTime;  
+    @FXML
+    private Button botonCancelar, botonInicio;
+    @FXML
+    private ComboBox<Integer> horasInput, minutosInput, segundosInput;
+    @FXML
     private Text horasTime, minutosTime, segundosTime;
     @FXML
     private AnchorPane timerPane, menuPane;
@@ -79,17 +85,15 @@ public class Controller implements Initializable {
         }
     }
 
- /**
      * Asigna el valor seleccionado en cada comboBox
      * al valor inicial de cada uno de los nodos Text
-     * que forman el cronómetro.
+     * que forman el cronï¿½metro.
      */
     void setOutput(){
         LinkedList<Integer> actualHms = secondsToHms(segundosActuales);
         horasTime.setText(numberMap.get(actualHms.get(0)));
         minutosTime.setText(numberMap.get(actualHms.get(1)));
         segundosTime.setText(numberMap.get(actualHms.get(2)));
-		
 
 }
     public void scrollUp(){
@@ -109,7 +113,7 @@ public class Controller implements Initializable {
         parallelTransition = new ParallelTransition(transition01,transition02);
         parallelTransition.setOnFinished(e -> {
             try{
-                System.out.println("Comienza la cuenta atrás");
+                System.out.println("Comienza la cuenta atrï¿½s");
                 startCountdown();
             }catch (Exception exception){}
         });
@@ -138,3 +142,4 @@ public class Controller implements Initializable {
 
 
 }
+
