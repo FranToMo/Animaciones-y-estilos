@@ -79,12 +79,32 @@ public class Controller implements Initializable {
         return respuesta;
     }
 
+    /**
+     * Métodos encargados de animar los Pane, estos se encuentran uno
+     * encima del otro y ante determinados eventos se produce una animación.
+     * En este caso el pane superior se aparta para mostrar al inferior.
+     */
     public void scrollUp(){
 
         transition01 = new TranslateTransition();
         transition01.setDuration(Duration.millis(100));
         transition01.setToX(0);
         transition01.setToY(200);
+        selectedPane(menuPane, timerPane);
+        parallelTransition.setOnFinished(e -> {
+          startCountdown();
+        });
+        parallelTransition.play();
+    }
+
+    /**
+     * Método que optimiza el uso de las variables que
+     * se repiten en los dos métodos encargados de
+     * ejecutar la animación.
+     * @param menuPane pane que contiene los nodos del tipo ComboBox.
+     * @param timerPane pane que contiene los nodos del tipo Text.
+     */
+    private void selectedPane(AnchorPane menuPane, AnchorPane timerPane) {
         transition01.setNode(menuPane);
         transition02 = new TranslateTransition();
         transition02.setDuration(Duration.millis(100));
@@ -94,29 +114,24 @@ public class Controller implements Initializable {
         transition02.setToY(0);
         transition02.setNode(timerPane);
         parallelTransition = new ParallelTransition(transition01,transition02);
-      parallelTransition.setOnFinished(e -> {
-          startCountdown();
-        });
-        parallelTransition.play();
     }
-
+    /**
+     * Métodos encargados de animar los Pane, estos se encuentran uno
+     * encima del otro y ante determinados eventos se produce una animación.
+     * En este caso el pane superior vuelve a su posición inicial cubriendo
+     * al inferior para mostrarse el mismo.
+     */
     public void scrollDown(){
 
         transition01 = new TranslateTransition();
         transition01.setDuration(Duration.millis(100));
         transition01.setToX(0);
         transition01.setToY(-200);
-        transition01.setNode(timerPane);
-        transition02 = new TranslateTransition();
-        transition02.setDuration(Duration.millis(100));
-        transition02.setFromX(0);
-        transition02.setFromY(200);
-        transition02.setToX(0);
-        transition02.setToY(0);
-        transition02.setNode(menuPane);
-        parallelTransition = new ParallelTransition(transition01,transition02);
-        parallelTransition.play();
+        selectedPane(timerPane, menuPane);
+        parallelTransition.setOnFinished(e -> {
 
+        });
+        parallelTransition.play();
     }
 
     /**
