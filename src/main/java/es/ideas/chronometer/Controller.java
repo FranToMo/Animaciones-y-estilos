@@ -11,15 +11,16 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
+import javafx.util.Duration;
 
 public class Controller implements Initializable {
 
-	@FXML
-    private ComboBox<Integer> horasInput, minutosInput, segundosInput;
-    @FXML
-    private Text horasTime, minutosTime, segundosTime;  
-    @FXML
-    private Button botonCancelar, botonInicio;
     @FXML
     private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
@@ -27,14 +28,17 @@ public class Controller implements Initializable {
     @FXML
     private Button botonCancelar, botonInicio;
     @FXML
-    private ComboBox<Integer> horasInput, minutosInput, segundosInput;
-    @FXML
-    private Text horasTime, minutosTime, segundosTime;
+    private ComboBox<Integer> horasInput, minutosInput, segundosInput;      
     @FXML
     private AnchorPane timerPane, menuPane;
-    Map<Integer, String> numberMap;
-    Integer segundosActuales;	
-	
+	  Map<Integer, String> numberMap;
+    Integer segundosActuales;
+    private static final String MEDIA_URL = "media/alarma.mp3";
+    boolean detener;    
+    Thread thread;
+    TranslateTransition transition01,transition02;
+    ParallelTransition parallelTransition;
+
 
     public Integer hmsToSeconds(Integer h, Integer m, Integer s) {
         Integer hToSeconds = h * 3600;
@@ -55,8 +59,9 @@ public class Controller implements Initializable {
         return respuesta;
     }
 
-    @Override
+     @Override
     public void initialize(URL location, ResourceBundle resources) {
+detener = true;
 
         ObservableList<Integer> listaDeHoras = FXCollections.observableArrayList();
         ObservableList<Integer> listaDeMinutosYSegundos = FXCollections.observableArrayList();
@@ -139,7 +144,47 @@ public class Controller implements Initializable {
 
     }
 
+    @FXML
+    void start(ActionEvent event) {
+        detener=false;
+        segundosActuales = hmsToSeconds(horasInput.getValue(),
+                minutosInput.getValue(),
+                segundosInput.getValue());
+        horasInput.setValue(0);
+        minutosInput.setValue(0);
+        segundosInput.setValue(0);
+        scrollUp();
+    }
 
+    void startCountdown(){
+       thread = new Thread(() -> {
+           try {
+               while (!detener){
+                   setOutput();
+                   Thread.sleep(1000);
+                   if(segundosActuales == 0) {
+                       scrollDown();
+                       playAudio();
+                       detener=true;
+                   }
+                   segundosActuales-=1;
+               }
+           }catch (Exception e){}
+       }) ;
+       thread.start();
+    }
 
+    @FXML
+    void stopped(ActionEvent event) {
+        detener = true;
+        scrollDown();
+
+    }
+
+    private void playAudio(){
+        AudioClip alarma = new AudioClip(this.getClass().getResource(MEDIA_URL).toString());
+        alarma.setVolume(0.2);
+        alarma.play();
+    }
 }
 
