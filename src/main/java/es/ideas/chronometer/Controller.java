@@ -1,41 +1,40 @@
 package es.ideas.chronometer;
 
-import javafx.animation.ParallelTransition;
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
-import javafx.util.Duration;
-
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
+import javafx.util.Duration;
 
 public class Controller implements Initializable {
-
     
+	@FXML
+    private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
+    private Text horasTime, minutosTime, segundosTime;	
+	@FXML
     private Button botonCancelar, botonInicio;
     @FXML
     private ComboBox<Integer> horasInput, minutosInput, segundosInput;
     @FXML
-    private Text horasTime, minutosTime, segundosTime;
-    @FXML
     private AnchorPane timerPane, menuPane;
-
-    private static final String MEDIA_URL = "media/alarma.mp3";
-    boolean detener;
-    Map<Integer, String> numberMap;
+	Map<Integer, String> numberMap;
     Integer segundosActuales;
+    private static final String MEDIA_URL = "media/alarma.mp3";
+    boolean detener;    
     Thread thread;
     TranslateTransition transition01,transition02;
     ParallelTransition parallelTransition;
@@ -129,6 +128,18 @@ detener = true;
             }
         }
     }
+	
+	    /**
+     * Asigna el valor seleccionado en cada comboBox
+     * al valor inicial de cada uno de los nodos Text
+     * que forman el cronómetro.
+     */
+    void setOutput(){
+        LinkedList<Integer> actualHms = secondsToHms(segundosActuales);
+        horasTime.setText(numberMap.get(actualHms.get(0)));
+        minutosTime.setText(numberMap.get(actualHms.get(1)));
+        segundosTime.setText(numberMap.get(actualHms.get(2)));
+    }
 
 
     @FXML
@@ -161,17 +172,6 @@ detener = true;
        thread.start();
     }
 
-    /**
-     * Asigna el valor seleccionado en cada comboBox
-     * al valor inicial de cada uno de los nodos Text
-     * que forman el cronómetro.
-     */
-    void setOutput(){
-        LinkedList<Integer> actualHms = secondsToHms(segundosActuales);
-        horasTime.setText(numberMap.get(actualHms.get(0)));
-        minutosTime.setText(numberMap.get(actualHms.get(1)));
-        segundosTime.setText(numberMap.get(actualHms.get(2)));
-    }
     @FXML
     void stopped(ActionEvent event) {
         detener = true;
