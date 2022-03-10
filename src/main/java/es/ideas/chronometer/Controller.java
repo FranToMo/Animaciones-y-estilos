@@ -20,6 +20,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
 
+/**
+ * Clase controlador de la aplicacion encargada de manejar la lógica que actualiza la vista.
+ * @since 1.0
+ * @author Francisco Tortillol Molina & Carlos José Sanchez Carmona
+ * @see <a href="https://github.com/03-colores/coloresmain.git">Repositorio en GitHub</a>
+ */
 public class Controller implements Initializable {
 
     @FXML
@@ -28,22 +34,38 @@ public class Controller implements Initializable {
     private Text horasTime, minutosTime, segundosTime;
     @FXML
     private AnchorPane timerPane, menuPane;
+    @FXML
+    private Button btnPause;
 
     private static final String MEDIA_URL = "media/alarma.mp3";
-    boolean detener;
+    boolean detener,pausar;
     Map<Integer, String> numberMap;
     Integer segundosActuales;
     Thread thread;
     TranslateTransition transition01,transition02;
     ParallelTransition parallelTransition;
 
-
+    /**
+     * Transforma los valores enteros que recibe (representando horas, minutos y segundos),
+     * en un entero que representa los segundos totales equivalentes.
+     * @param h entero que representa cantidad de horas
+     * @param m entero que representa cantidad de minutos
+     * @param s entero que representa cantidad de segundos
+     * @return Un integer (cantidad total de segundos equivalentes).
+     */
     public Integer hmsToSeconds(Integer h, Integer m, Integer s) {
         Integer hToSeconds = h * 3600;
         Integer mToSecond = m * 60;
 
         return hToSeconds + mToSecond + s;
     }
+
+    /**
+     * Transforma el valor que recibe como parámetro y que representa segundos,
+     * en horas, minutos y segundos.
+     * @param segundosActuales Su valor representa el total de segundos.
+     * @return devuelve una lista con tres valores (horas, minutos y segundos).
+     */
 
     public LinkedList<Integer> secondsToHms(Integer segundosActuales) {
         Integer horas = segundosActuales / 3600;
@@ -96,9 +118,21 @@ public class Controller implements Initializable {
         parallelTransition.play();
 
     }
+
+    /**
+     * Heredado de la interfaz Initializable. En él se inicializan dos listas
+     * del tipo ObservableList y se le asignan valores en función del dato que
+     * van a representar (horas, minutos o segundos).
+     * También se inicializa y asignan pares de valores a un Map, con un número para
+     * cada clave que un string por valor, este último con el formato correcto para
+     * ser asignado a cada uno de los nodos del tipo Text.
+     * @param url del la clase URL
+     * @param resources de la clase ResourceBundle
+     */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-detener = true;
+    public void initialize(URL url, ResourceBundle resources) {
+//detener = false;
+pausar = false;
 
         ObservableList<Integer> listaDeHoras = FXCollections.observableArrayList();
         ObservableList<Integer> listaDeMinutosYSegundos = FXCollections.observableArrayList();
@@ -128,9 +162,20 @@ detener = true;
     }
 
 
+    /**
+     * Comienza asigna los valores false a los booleanos detener y pausar
+     * Asigna a una variable al total de segundos que representan los valores
+     * seleccionados en los comboBox y reinicia estos a 0.
+     * Modifica el texto que presenta el botón encargado de pausar este decremento.
+     * Por último llama al método encargado de realizar una animación.
+     *
+     * @param event en este caso, el evento que ocurre al pulsar el botón
+     */
     @FXML
     void start(ActionEvent event) {
         detener=false;
+        pausar = false;
+        btnPause.setText("Pausar");
         segundosActuales = hmsToSeconds(horasInput.getValue(),
                 minutosInput.getValue(),
                 segundosInput.getValue());
@@ -140,6 +185,16 @@ detener = true;
         scrollUp();
     }
 
+    /**
+     * Mediante la instancia de un hilo, clase Thread, procesa en
+     * su método run el decremento del valor obtenido anteriormente
+     * (segundos totales) y detiene la ejecución cada segundo,
+     * mediante un método envía los datos obtenidos a los nodos
+     * del tipo Text.
+     * Esta ejecución se detendrá al llegar a 0 el valor decrementado
+     * y desencadenará las acciones (animation, sonido) contenidas en
+     * varios métodos
+     */
     void startCountdown(){
        thread = new Thread(new Runnable() {
            @Override
@@ -153,7 +208,7 @@ detener = true;
                            playAudio();
                            detener=true;
                        }
-                       segundosActuales-=1;
+                       if(!pausar)segundosActuales-=1;
                    }
                }catch (Exception e){}
            }
@@ -162,9 +217,12 @@ detener = true;
     }
 
     /**
-     * Asigna el valor seleccionado en cada comboBox
-     * al valor inicial de cada uno de los nodos Text
-     * que forman el cronómetro.
+     * Asigna a cada item del LinkedList el valor que le corresponde,
+     * como horas, minutos o segundos, obtenidos de convertir la
+     * cantidad de segundos que quedan tras realizar un decremento
+     * en estos valores antes mencionados.
+     * Una vez almacenados en esta lista son asignados a su nodo del tipo
+     * Text correspondiente.
      */
     void setOutput(){
         LinkedList<Integer> actualHms = secondsToHms(segundosActuales);
@@ -172,16 +230,47 @@ detener = true;
         minutosTime.setText(numberMap.get(actualHms.get(1)));
         segundosTime.setText(numberMap.get(actualHms.get(2)));
     }
+    /**
+     * Al pulsar sobre el botón que desencadena este evento se asigna el
+     * valor necesario al parámetro boolean para que finalice la ejecución
+     * del hilo, además reinicia el valor del booleano encargado de controlar
+     * la pausa en previsión de que esta estuviera activa.
+     */
     @FXML
     void stopped(ActionEvent event) {
         detener = true;
         scrollDown();
-
+        pausar=false;
+    }
+    /**
+     * Al pulsar sobre el botón que desencadena este evento se asigna el
+     * valor necesario al parámetro boolean para que sea pausado
+     * el decremento al valor que representa a los segundos totales,
+     * si esta acción no se estuviera realizando ya.
+     * También se cambia el texto del botón para que indique la acción
+     * que este puede realizar al ser pulsado.
+     */
+    @FXML
+    void pause(ActionEvent event) {
+        if(!pausar){
+            btnPause.setText("Reanudar");
+            pausar=true;
+        }
+        else {
+            btnPause.setText("Pausar");
+            pausar=false;
+        }
     }
 
-    private void playAudio(){
+    /**
+     * Instancia un objeto del tipo AudioClip y reproduce un sonido durante 3 segundos.  *
+     * @throws InterruptedException
+     */
+    private void playAudio() throws InterruptedException {
         AudioClip alarma = new AudioClip(this.getClass().getResource(MEDIA_URL).toString());
         alarma.setVolume(0.2);
         alarma.play();
+        Thread.sleep(3000);
+        alarma.stop();
     }
 }
