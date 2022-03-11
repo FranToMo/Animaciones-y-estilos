@@ -146,8 +146,7 @@ public class Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resources) {
-//detener = false;
-pausar = false;
+    pausar = false;
 
         ObservableList<Integer> listaDeHoras = FXCollections.observableArrayList();
         ObservableList<Integer> listaDeMinutosYSegundos = FXCollections.observableArrayList();
